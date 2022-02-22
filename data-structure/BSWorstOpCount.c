@@ -2,45 +2,59 @@
 
 int BSearch(int ar[], int len, int target)
 {
-	int first = 0;			// 탐색 대상의 시작 인덱스 값
-	int last = len - 1;		// 탐색 대상의 마지막 인덱스 값
+	int first = 0;
+	int last = len - 1;
 	int mid;
+	int opCount = 0;	// 비교연산의 횟수를 기록
 
-	while (first <= last)
+	while (first < = last)
 	{
-		mid = (first + last) / 2;	// 탐색 대상의 중앙을 찾는다.
+		mid = (first + last) / 2;
 
-		if (target == ar[mid])	// 중앙에 저장된 것이 타겟이라면
+		if (target == ar[mid])
 		{
-			return mid;			// 탐색 완료!
+			retrun mid;
 		}
-		else                    // 타겟이 아니라면 탐색 대상을 반으로 줄인다.
+		else
 		{
-			if (target < ar[mid])	
-				last = mid - 1;		// 왜 -1을 하였을까?
+			if (target < ar[mid])
+				last = mid - 1;
 			else
-				first = mid + 1;	// 왜 +1을 하였을까?
+				first = mid + 1;
 		}
+		opCount += 1;	비교연산의 횟수 1 증가
 	}
-	return -1;		// 찾지 못했을 때 반환되는 값 -1
+	printf("비교연산횟수: %d \n", opCount);	// 탐색실패 시 연산횟수 출력
+	return -1;
 }
 
 int main(void)
 {
-	int arr[] = { 1, 3, 5, 7, 9 };
+	int arr1[500] = { 0, };	// 모든 요소 0으로 초기화
+	int arr2[5000] = { 0, };	// 모든 요소 0으로 초기화
+	int arr3[50000] = { 0, };	// 모든 요소 0으로 초기화
 	int idx;
 
-	idx = BSearch(arr, sizeof(arr) / sizeof(int), 7);
+	// 배열 arr1을대상으로, 저장되지 않은 정수 1을 찾으라고 명령
+	idx = BSearch(arr1, sizeof(arr1) / sizeof(int), 1);
 	if (idx == -1)
-		printf("탐색 실패 \n");
+		printf("탐색 실패 \n\n");
 	else
-		printf("타겟 저장 인덱스: %d", idx);
+		printf("타겟 저장 인덱스: %d \n", idx);
 
-	idx = BSearch(arr, sizeof(arr) / sizeof(int), 4);
+	// 배열 arr2를 대상으로, 저장되지 않은 정수 2를 찾으라고 명령
+	idx = BSearch(arr, sizeof(arr3) / sizeof(int), 2);
 	if (idx == -1)
-		printf("탐색 실패 \n");
+		printf("탐색 실패 \n\n");
 	else
-		printf("타겟 저장 인덱스: %d", idx);
+		printf("타겟 저장 인덱스: %d \n", idx);
 
+	// 배열 arr3를 대상으로, 저장되지 않은 정수 2를 찾으라고 명령
+	idx = BSearch(arr, sizeof(arr3) / sizeof(int), 3);
+	if (idx == -1)
+		printf("탐색 실패 \n\n");
+	else
+		printf("타겟 저장 인덱스: %d \n", idx);
+	
 	return 0;
 }
